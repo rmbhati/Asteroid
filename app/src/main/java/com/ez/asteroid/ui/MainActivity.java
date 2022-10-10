@@ -84,7 +84,6 @@ public class MainActivity extends Activity {
         datePickerDialog.show();
     }
 
-
     public void callAPI(String from, String to) {
         showDialog();
         String url = "https://api.nasa.gov/neo/rest/v1/feed?start_date=" + from + "&end_date=" + to + "&api_key=DEMO_KEY";
