@@ -102,6 +102,7 @@ public class MainActivity extends Activity {
                 try {
                     JSONObject object = new JSONObject(response.getString("near_earth_objects"));
                     final ArrayList<HashMap<String, String>> listData = new ArrayList<>();
+                    final ArrayList<HashMap<String, String>> listSubData = new ArrayList<>();
                     for (Iterator<String> iter = object.keys(); iter.hasNext(); ) {
                         HashMap<String, String> map = new HashMap<>();
                         String key = iter.next();
@@ -110,48 +111,53 @@ public class MainActivity extends Activity {
                         map.put("value", object.getString(key));
                         listData.add(map);
                     }
-                    if (listData.isEmpty()) {
-                        Toast.makeText(getApplicationContext(), "Data not found", Toast.LENGTH_SHORT).show();
-                    } else {
-                        final ArrayList<HashMap<String, String>> listSubData = new ArrayList<>();
-                        for (int i = 0; i < listData.size(); i++) {
-                            JSONArray jsonArray = new JSONArray(listData.get(i).get("value"));
-                            for (int j = 0; j < jsonArray.length(); j++) {
-                                HashMap<String, String> map = new HashMap<>();
-                                Double min_avg = 0.0;
-                                Double max_avg = 0.0;
-                                Integer avg_count = 0;
-                                Double maxKMperHR = -1.0;
-                                Double minKMperHR = -1.0;
-                                JSONObject objectdata = jsonArray.getJSONObject(j);
-                                map.put("astID", objectdata.getString("id"));
-                                //Third Point
-                                JSONObject objEstDiameter = objectdata.getJSONObject("estimated_diameter").getJSONObject("kilometers");
-                                min_avg = min_avg + objEstDiameter.getDouble("estimated_diameter_min");
-                                max_avg = max_avg + objEstDiameter.getDouble("estimated_diameter_max");
-                                avg_count = avg_count + 1;
 
-                                JSONArray approchArray = new JSONArray(objectdata.get("close_approach_data").toString());
-                                if (approchArray.length() > 0) {
-                                    JSONObject objCloseApproachData = approchArray.getJSONObject(0);
-                                    map.put("date", objCloseApproachData.getString("close_approach_date"));
-                                    //Fastest speed
-                                    JSONObject objRelVelocity = objCloseApproachData.getJSONObject("relative_velocity");
-                                    if (objRelVelocity.getDouble("kilometers_per_hour") > maxKMperHR)
-                                        maxKMperHR = objRelVelocity.getDouble("kilometers_per_hour");
+                    for (int i = 0; i < listData.size(); i++) {
+                        JSONArray jsonArray = new JSONArray(listData.get(i).get("value"));
+                        for (int j = 0; j < jsonArray.length(); j++) {
+                            HashMap<String, String> map = new HashMap<>();
+                            Double min_avg = 0.0;
+                            Double max_avg = 0.0;
+                            Integer avg_count = 0;
+                            Double maxKMperHR = -1.0;
+                            Double minKMperHR = -1.0;
+                            JSONObject objectdata = jsonArray.getJSONObject(j);
+                            map.put("astID", objectdata.getString("id"));
+                            //Third Point
+                            JSONObject objEstDiameter = objectdata.getJSONObject("estimated_diameter").getJSONObject("kilometers");
+                            min_avg = min_avg + objEstDiameter.getDouble("estimated_diameter_min");
+                            max_avg = max_avg + objEstDiameter.getDouble("estimated_diameter_max");
+                            avg_count = avg_count + 1;
 
-                                    //Closest Distance(min Distance)
-                                    JSONObject objMissDistance = objCloseApproachData.getJSONObject("miss_distance");
-                                    if (objMissDistance.getDouble("kilometers") > minKMperHR)
-                                        minKMperHR = objMissDistance.getDouble("kilometers");
-                                }
-                                Double avg = min_avg / avg_count;
-                                map.put("avg", avg + "");
-                                map.put("fast", maxKMperHR + "");
-                                map.put("min", minKMperHR + "");
-                                listSubData.add(map);
+                            JSONArray approchArray = new JSONArray(objectdata.get("close_approach_data").toString());
+                            if (approchArray.length() > 0) {
+                                JSONObject objCloseApproachData = approchArray.getJSONObject(0);
+                                map.put("date", objCloseApproachData.getString("close_approach_date"));
+                                //Fastest speed
+                                JSONObject objRelVelocity = objCloseApproachData.getJSONObject("relative_velocity");
+                                if (objRelVelocity.getDouble("kilometers_per_hour") > maxKMperHR)
+                                    maxKMperHR = objRelVelocity.getDouble("kilometers_per_hour");
+
+                                //Closest Distance(min Distance)
+                                JSONObject objMissDistance = objCloseApproachData.getJSONObject("miss_distance");
+                                if (objMissDistance.getDouble("kilometers") > minKMperHR)
+                                    minKMperHR = objMissDistance.getDouble("kilometers");
                             }
+                            Double minAvg = min_avg / avg_count;
+                            Double maxAvg = max_avg / avg_count;
+                            map.put("min_avg", minAvg + "");
+                            map.put("max_avg", maxAvg + "");
+                            map.put("fast", maxKMperHR + "");
+                            map.put("min", minKMperHR + "");
+                            listSubData.add(map);
                         }
+                    }
+
+                    if (listSubData.isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "No data Found", Toast.LENGTH_SHORT).show();
+                    } else {
+                        //set to adapter
+                        recyclerView.setAdapter(new HomeAdapter(getApplicationContext(),listSubData));
                     }
 
                 } catch (Exception e) {
