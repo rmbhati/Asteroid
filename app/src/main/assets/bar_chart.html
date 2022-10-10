@@ -1,0 +1,32 @@
+<html>
+<head>
+    <script type="text/javascript" src="fusioncharts.js"></script>
+    <script type="text/javascript" src="fusioncharts.charts.js"></script>
+    <script type="text/javascript" src="fusioncharts.theme.fint.js"></script>
+    <script type="text/javascript">
+	function myJavaScriptFunc(chartData,deviceWidth){
+    var revenueChart = new FusionCharts({
+        "type": "column2d",
+        "renderAt": "chartContainer",
+        "width": "400",
+        "height": "400",
+        "dataFormat": "json",
+        "dataSource": {
+            "chart": {
+                "caption": "Asteroid Data",
+                "useplotgradientcolor": "0",
+                "yAxisName": "Asteroid size",
+                "theme": "fint",
+                "showvalues": "0",
+            },
+            "data": chartData
+        }
+    });
+    revenueChart.render();
+	}
+    </script>
+</head>
+<body>
+<div id="chartContainer">FusionCharts XT will load here!</div>
+</body>
+</html>

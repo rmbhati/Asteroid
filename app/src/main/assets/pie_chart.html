@@ -1,0 +1,40 @@
+<html>
+<head>
+    <script src="fusioncharts.js"></script>
+    <script src="fusioncharts.charts.js"></script>
+    <script type="text/javascript">
+	function myJavaScriptFuncPie(chartData,deviceWidth,capTitle,chartType){
+    var ageGroupChart = new FusionCharts({
+        type: chartType,
+        renderAt: "chartContainer",
+        width: deviceWidth,
+        height: "300",
+        dataFormat: "json",
+        dataSource: {
+            "chart": {
+                "caption": capTitle,
+                "bgColor": "#ffffff",
+                "showBorder": "0",
+                "use3DLighting": "0",
+                "showShadow": "0",
+                "pieradius": "80",
+                "decimals": "1",
+                "captionFontSize": "15",
+                "toolTipColor": "#ffffff",
+                "toolTipBorderThickness": "0",
+                "toolTipBgColor": "#000000",
+                "toolTipBgAlpha": "80",
+                "toolTipBorderRadius": "2",
+                "toolTipPadding": "5",
+                "showHoverEffect": "1"
+            },
+            "data": chartData
+        }
+    }).render();
+    }
+    </script>
+</head>
+<body>
+<div id="chartContainer">FusionCharts XT will load here!</div>
+</body>
+</html>

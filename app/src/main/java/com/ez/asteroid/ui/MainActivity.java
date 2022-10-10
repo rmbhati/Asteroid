@@ -1,26 +1,20 @@
 package com.ez.asteroid.ui;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.View;
-import android.widget.DatePicker;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ez.asteroid.BuildConfig;
 import com.ez.asteroid.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -33,15 +27,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.Set;
 
 import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends Activity {
     private RecyclerView recyclerView;
+    private WebView webView;
     private ProgressDialog pDialog;
-    private SimpleDateFormat sdf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,18 +49,17 @@ public class MainActivity extends Activity {
         TextView from = findViewById(R.id.from);
         TextView to = findViewById(R.id.to);
         TextView submit = findViewById(R.id.submit);
+        webView = findViewById(R.id.webView);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
-        sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String today = sdf.format(new Date());
         from.setText(today);
         to.setText(today);
 
         from.setOnClickListener(view -> datePicker(from));
         to.setOnClickListener(view -> datePicker(to));
-        callAPI(from.getText().toString(), to.getText().toString());
 
         submit.setOnClickListener(view -> {
             if (from.getText().toString().isEmpty()) {
@@ -103,6 +98,7 @@ public class MainActivity extends Activity {
                     JSONObject object = new JSONObject(response.getString("near_earth_objects"));
                     final ArrayList<HashMap<String, String>> listData = new ArrayList<>();
                     final ArrayList<HashMap<String, String>> listSubData = new ArrayList<>();
+                    ArrayList<HashMap<String, String>> listChart = new ArrayList<>();
                     for (Iterator<String> iter = object.keys(); iter.hasNext(); ) {
                         HashMap<String, String> map = new HashMap<>();
                         String key = iter.next();
@@ -116,6 +112,7 @@ public class MainActivity extends Activity {
                         JSONArray jsonArray = new JSONArray(listData.get(i).get("value"));
                         for (int j = 0; j < jsonArray.length(); j++) {
                             HashMap<String, String> map = new HashMap<>();
+                            HashMap<String, String> mapChart = new HashMap<>();
                             Double min_avg = 0.0;
                             Double max_avg = 0.0;
                             Integer avg_count = 0;
@@ -133,6 +130,8 @@ public class MainActivity extends Activity {
                             if (approchArray.length() > 0) {
                                 JSONObject objCloseApproachData = approchArray.getJSONObject(0);
                                 map.put("date", objCloseApproachData.getString("close_approach_date"));
+                                mapChart.put("label", objCloseApproachData.getString("close_approach_date"));
+                                mapChart.put("value", jsonArray.length() + "");
                                 //Fastest speed
                                 JSONObject objRelVelocity = objCloseApproachData.getJSONObject("relative_velocity");
                                 if (objRelVelocity.getDouble("kilometers_per_hour") > maxKMperHR)
@@ -150,14 +149,38 @@ public class MainActivity extends Activity {
                             map.put("fast", maxKMperHR + "");
                             map.put("min", minKMperHR + "");
                             listSubData.add(map);
+                            listChart.add(mapChart);
                         }
                     }
+
 
                     if (listSubData.isEmpty()) {
                         Toast.makeText(getApplicationContext(), "No data Found", Toast.LENGTH_SHORT).show();
                     } else {
+                        //Chart set data
+                        Set<HashMap<String, String>> s = new HashSet<>();
+                        s.addAll(listChart);
+                        listChart = new ArrayList<>();
+                        listChart.addAll(s);
+
+                        JSONArray jsonArray = new JSONArray(listChart);
+
+                        webView.getSettings().setJavaScriptEnabled(true);
+                        webView.setWebChromeClient(new WebChromeClient());
+                        webView.loadUrl("file:///android_asset/bar_chart.html");
+
+
+                        webView.setWebViewClient(new WebViewClient() {
+
+                            @Override
+                            public void onPageFinished(WebView view, String url) {
+                                super.onPageFinished(view, url);
+                                webView.loadUrl("javascript:myJavaScriptFunc(" + jsonArray + ",'100')");
+                            }
+                        });
+
                         //set to adapter
-                        recyclerView.setAdapter(new HomeAdapter(getApplicationContext(),listSubData));
+                        recyclerView.setAdapter(new HomeAdapter(getApplicationContext(), listSubData));
                     }
 
                 } catch (Exception e) {
