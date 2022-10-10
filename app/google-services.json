@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "422209400385",
+    "firebase_url": "https://eztimetrack.firebaseio.com",
+    "project_id": "eztimetrack",
+    "storage_bucket": "eztimetrack.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422209400385:android:bf352adfbb6faaa4fca0c0",
+        "android_client_info": {
+          "package_name": "com.ez.attendance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422209400385-vnqkg8vnbemjii8lnqamcqt3b1uc1hlm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiBqZRjIwS0J6b2kUzuBszn3Fx6tlYZRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422209400385-vnqkg8vnbemjii8lnqamcqt3b1uc1hlm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422209400385:android:0a6cf98195415cb7fca0c0",
+        "android_client_info": {
+          "package_name": "com.ez.timetrack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422209400385-vnqkg8vnbemjii8lnqamcqt3b1uc1hlm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiBqZRjIwS0J6b2kUzuBszn3Fx6tlYZRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422209400385-vnqkg8vnbemjii8lnqamcqt3b1uc1hlm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

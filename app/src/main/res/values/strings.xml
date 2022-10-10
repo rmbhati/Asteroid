@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">EzAttendancePro</string>
+    <string name="register_sms">Please fillup all the details and complete the Registration</string>
+
+
+    <array name="leaveType">
+        <item>Select</item>
+        <item>Apply Leave</item>
+        <item>Encash Leaves</item>
+        <item>LTA</item>
+    </array>
+    <array name="Task">
+        <item>Apply Leave</item>
+        <item>Encash Leaves</item>
+        <item>LTA</item>
+    </array>
+    <array name="Duration">
+        <item>Full Day</item>
+        <item>First Half</item>
+        <item>Second Half</item>
+        <item>Multiple Days</item>
+    </array>
+    <array name="fromDate">
+        <item>Entire Day</item>
+        <item>Second Half</item>
+    </array>
+    <array name="toDate">
+        <item>Entire Day</item>
+        <item>First Half</item>
+    </array>
+    <array name="odDuration">
+        <item>Full Single Day</item>
+        <item>First half of day</item>
+        <item>Second half of day</item>
+        <item>Multiple Days</item>
+        <item>Intermediate</item>
+    </array>
+    <array name="comp">
+        <item>Full Day</item>
+        <item>First Half</item>
+        <item>Second Half</item>
+    </array>
+    <array name="lwpDuration">
+        <item>Full Single Day</item>
+        <item>First half of day</item>
+        <item>Second half of day</item>
+        <item>Multiple Days</item>
+    </array>
+
+</resources>
