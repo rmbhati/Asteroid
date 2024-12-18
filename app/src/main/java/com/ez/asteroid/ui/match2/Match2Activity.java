@@ -36,8 +36,8 @@ public class Match2Activity extends AppCompatActivity {
         list = new ArrayList<>();
         MatchModel model = new MatchModel(
                 R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4,
-                R.drawable.image2, R.drawable.image3, R.drawable.image4, R.drawable.image1,
-                3, 0, 2, 1
+                R.drawable.image2, R.drawable.image1, R.drawable.image4, R.drawable.image3,
+                1, 0, 3, 2
         );
         list.add(model);
 
