@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Asteroid.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Asteroid.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Asteroid.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Asteroid.app.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Asteroid.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Asteroid.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sdk/Asteroid.sdk.iml" filepath="$PROJECT_DIR$/.idea/modules/sdk/Asteroid.sdk.iml" />
     </modules>
   </component>
 </project>

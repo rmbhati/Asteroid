@@ -3,6 +3,7 @@ package com.ez.asteroid.ui;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -62,13 +63,14 @@ public class MainActivity extends Activity {
         to.setOnClickListener(view -> datePicker(to));
 
         submit.setOnClickListener(view -> {
-            if (from.getText().toString().isEmpty()) {
+            /*if (from.getText().toString().isEmpty()) {
                 Toast.makeText(MainActivity.this, "Select from Date", Toast.LENGTH_SHORT).show();
             } else if (to.getText().toString().isEmpty()) {
                 Toast.makeText(MainActivity.this, "Select to Date", Toast.LENGTH_SHORT).show();
             } else {
                 callAPI(from.getText().toString(), to.getText().toString());
-            }
+            }*/
+            startActivity(new Intent(this, com.ez.asteroid.ui.match2.Match2Activity.class));
         });
     }
 

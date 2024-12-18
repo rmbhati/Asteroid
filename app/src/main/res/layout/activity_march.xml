@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Left side images -->
+    <ImageView
+        android:id="@+id/imageLeft1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/image1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="50dp" />
+
+    <ImageView
+        android:id="@+id/imageLeft2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/image2"
+        android:layout_below="@id/imageLeft1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20dp" />
+
+    <ImageView
+        android:id="@+id/imageLeft3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/image3"
+        android:layout_below="@id/imageLeft2"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20dp" />
+
+    <ImageView
+        android:id="@+id/imageLeft4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/image4"
+        android:layout_below="@id/imageLeft3"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20dp" />
+
+    <!-- Right side images -->
+    <ImageView
+        android:id="@+id/imageRight1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/image1"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="50dp" />
+
+    <ImageView
+        android:id="@+id/imageRight2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/image2"
+        android:layout_below="@id/imageRight1"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp" />
+
+    <ImageView
+        android:id="@+id/imageRight3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/image3"
+        android:layout_below="@id/imageRight2"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp" />
+
+    <ImageView
+        android:id="@+id/imageRight4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/image4"
+        android:layout_below="@id/imageRight3"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp" />
+
+    <!-- Custom View to draw lines -->
+    <com.ez.asteroid.ui.match.DrawLineView
+        android:id="@+id/drawLineView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"/>
+
+</RelativeLayout>
