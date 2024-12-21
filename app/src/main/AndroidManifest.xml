@@ -36,9 +36,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.match.MainActivity"
+        <activity android:name=".ui.BallonActivity"
+            android:screenOrientation="portrait"/>   <activity android:name=".ui.match.MainActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.match2.Match2Activity"
+            android:screenOrientation="portrait"/>  <activity android:name=".ui.match3.Match3"
             android:screenOrientation="portrait"/>
 
     </application>

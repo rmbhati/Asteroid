@@ -59,8 +59,15 @@ public class MainActivity extends Activity {
         from.setText(today);
         to.setText(today);
 
-        from.setOnClickListener(view -> datePicker(from));
-        to.setOnClickListener(view -> datePicker(to));
+        //from.setOnClickListener(view -> datePicker(from));
+        //to.setOnClickListener(view -> datePicker(to));
+        from.setOnClickListener(view -> {
+            //startActivity(new Intent(this, com.ez.asteroid.ui.match.MainActivity.class));
+            startActivity(new Intent(this, BallonActivity.class));
+        });
+        to.setOnClickListener(view -> {
+            startActivity(new Intent(this, com.ez.asteroid.ui.match3.Match3.class));
+        });
 
         submit.setOnClickListener(view -> {
             /*if (from.getText().toString().isEmpty()) {

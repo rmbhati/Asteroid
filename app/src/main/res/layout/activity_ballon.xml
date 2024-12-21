@@ -11,6 +11,7 @@
         />
     <ImageView
         android:layout_width="500dp"
+        android:id="@+id/cc"
         android:background="@color/black"
         android:layout_centerInParent="true"
         android:layout_height="500dp"/>
