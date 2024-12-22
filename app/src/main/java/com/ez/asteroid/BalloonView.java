@@ -2,13 +2,11 @@ package com.ez.asteroid;
 
 
 import android.content.Context;    // Importing Context class
-import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -16,14 +14,10 @@ import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.Random;
-import android.content.Context;
 
 public class BalloonView extends View {
 
@@ -47,9 +41,9 @@ public class BalloonView extends View {
         Display display = windowManager.getDefaultDisplay();
         display.getMetrics(displayMetrics);
 
+
         int screenWidth = displayMetrics.widthPixels;
         int screenHeight = displayMetrics.heightPixels;
-        Log.e("Screen Resolution", "Width: " + screenWidth + ", Height: " + screenHeight);
 
         // Initialize random balloons
         Random random = new Random();
