@@ -1,6 +1,5 @@
 package com.ez.asteroid.ui.match3;
 
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,8 +26,8 @@ public class LineView extends View {
     private boolean[] lineMatched;  // Tracks which lines are correctly drawn
     private Line currentLine;  // Tracks the currently drawn line
 
-    private Bitmap leftPointImage;  // Image for the left points
-    private Bitmap rightPointImage;  // Image for the right points
+    private Bitmap[] leftPointImages;  // Array for left point images
+    private Bitmap[] rightPointImages; // Array for right point images
 
     public LineView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -44,16 +43,31 @@ public class LineView extends View {
         drawnLines = new ArrayList<>();
         lineMatched = new boolean[4];
 
-        // Load images for points from drawable resources
-        leftPointImage = BitmapFactory.decodeResource(getResources(), R.drawable.approval); // Replace with your image
-        rightPointImage = BitmapFactory.decodeResource(getResources(), R.drawable.approval); // Replace with your image
+        // Load different images for each point from drawable resources
+        leftPointImages = new Bitmap[] {
+                BitmapFactory.decodeResource(getResources(), R.drawable.image1),
+                BitmapFactory.decodeResource(getResources(), R.drawable.image2),
+                BitmapFactory.decodeResource(getResources(), R.drawable.image3),
+                BitmapFactory.decodeResource(getResources(), R.drawable.image4)
+        };
 
-        // Ensure the images are loaded properly
-        if (leftPointImage == null) {
-            Log.e("LineView", "Left point image not loaded!");
+        rightPointImages = new Bitmap[] {
+                BitmapFactory.decodeResource(getResources(), R.drawable.image1),
+                BitmapFactory.decodeResource(getResources(), R.drawable.image2),
+                BitmapFactory.decodeResource(getResources(), R.drawable.image3),
+                BitmapFactory.decodeResource(getResources(), R.drawable.image4)
+        };
+
+        // Ensure images are loaded properly
+        for (int i = 0; i < leftPointImages.length; i++) {
+            if (leftPointImages[i] == null) {
+                Log.e("LineView", "Left point image " + i + " not loaded!");
+            }
         }
-        if (rightPointImage == null) {
-            Log.e("LineView", "Right point image not loaded!");
+        for (int i = 0; i < rightPointImages.length; i++) {
+            if (rightPointImages[i] == null) {
+                Log.e("LineView", "Right point image " + i + " not loaded!");
+            }
         }
 
         // Define the positions for the points (arbitrary positions)
@@ -77,13 +91,13 @@ public class LineView extends View {
         super.onDraw(canvas);
         Log.d("LineView", "onDraw called");
 
-        // Draw the images (left side and right side)
+        // Draw the images (left side and right side) with their respective images
         for (int i = 0; i < leftPoints.length; i++) {
-            drawImageAtPosition(canvas, leftPointImage, leftPoints[i]);
+            drawImageAtPosition(canvas, leftPointImages[i], leftPoints[i]);
         }
 
         for (int i = 0; i < rightPoints.length; i++) {
-            drawImageAtPosition(canvas, rightPointImage, rightPoints[i]);
+            drawImageAtPosition(canvas, rightPointImages[i], rightPoints[i]);
         }
 
         // Draw the currently drawn line (blue)
